@@ -11,8 +11,11 @@ builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(typeof(Program).Assembly);
 });
-   
-    
+builder.Services.AddMarten(opt =>
+{
+    opt.Connection(builder.Configuration.GetConnectionString("Database")!);
+}).UseLightweightSessions();
+
 //If you look at the ad carton method, this is adding the necessary services for Carter into ASP.Net
 //code dependency injection.
 
