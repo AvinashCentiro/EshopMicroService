@@ -28,9 +28,8 @@
 
         /*
         So basically in this endpoint definition we are mapping the Get request with this product slash ID information which takes a product id as a parameter.
-           
         And the endpoint is using the mediator.In order to send get product by id query object, then mediator will be trigger the corresponding query
-        
-        handler, and after that with getting the result object mapping this result object to the or get product*/
+        handler, and after that with getting the result object mapping this result object to the or get product
+        */
     }
 }

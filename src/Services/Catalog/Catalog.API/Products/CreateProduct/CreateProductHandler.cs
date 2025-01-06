@@ -7,7 +7,8 @@ namespace Catalog.API.Products.CreateProduct
     //these records are nothing but class with mentioned properties. 
     public record CreateProductResult(Guid Id);
     
-    internal class CreateProductCommandHandler(IDocumentSession session) : ICommandHandler<CreateProductCommand,CreateProductResult>
+    internal class CreateProductCommandHandler(IDocumentSession session) 
+        : ICommandHandler<CreateProductCommand,CreateProductResult>
     {
         //select I/F and  alt+Enter to implement missing functions 
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
