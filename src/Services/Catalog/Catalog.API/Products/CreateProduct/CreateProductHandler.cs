@@ -1,4 +1,5 @@
 ﻿
+
 namespace Catalog.API.Products.CreateProduct
 {
 
@@ -6,14 +7,32 @@ namespace Catalog.API.Products.CreateProduct
     :ICommand<CreateProductResult>;
     //these records are nothing but class with mentioned properties. 
     public record CreateProductResult(Guid Id);
-    
-    internal class CreateProductCommandHandler(IDocumentSession session) 
+
+
+    public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+    {
+        public CreateProductCommandValidator()
+        {
+            RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required");
+            RuleFor(x => x.Category).NotEmpty().WithMessage("Category is required");
+            RuleFor(x => x.Price).NotEmpty().GreaterThan(0).WithMessage("Price must be greater than 0");
+            RuleFor(x => x.ImageFile).NotEmpty().WithMessage("ImageFile must be Required");
+        }
+        
+    }
+
+
+    internal class CreateProductCommandHandler(IDocumentSession session,ILogger<CreateProductCommandHandler> logger) 
         : ICommandHandler<CreateProductCommand,CreateProductResult>
     {
         //select I/F and  alt+Enter to implement missing functions 
+        //Mediation pipeline behavior allows us to introduce additional processing steps such as the validation into the handling of the request.
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
 
+            // validator This instance is the validator object. It encapsulates all the rules for validating a CreateProductCommand.
+
+            logger.LogInformation("Called CreateProductCommandHandler.Handle with {@command}",command);
             var product = new Product
             {
                 Name = command.Name,
