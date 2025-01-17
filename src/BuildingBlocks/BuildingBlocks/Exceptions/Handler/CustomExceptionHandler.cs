@@ -19,8 +19,6 @@ namespace BuildingBlocks.Exceptions.Handler
         public async ValueTask<bool> TryHandleAsync(HttpContext context, Exception exception, CancellationToken cancellationToken)
         {
             logger.LogError("Error Message:{exceptionMessage},time of occurence{time}", exception.Message, DateTime.UtcNow);
-            throw new NotImplementedException();
-
 
             (string Details, string Title, int statusCode) details = exception switch
             {

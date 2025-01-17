@@ -1,5 +1,6 @@
 
-using BuildingBlocks.Exceptions.Handler;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,13 +47,43 @@ builder.Services.AddMarten(opt =>
     opt.Connection(builder.Configuration.GetConnectionString("Database")!);
 }).UseLightweightSessions();
 
+if (builder.Environment.IsDevelopment())
+    builder.Services.InitializeMartenWith<CatalogInitialData>();
+
+
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
+
+builder.Services.AddHealthChecks()
+    .AddNpgSql(builder.Configuration.GetConnectionString("Database")!);
 
 var app = builder.Build();
 
 //set up HTTP request pipeline
+
+#region HealthChecks
+
+/*
+Health checks endpoints can be configured for various real time monitoring scenarios, so that means health checks and health probes can be used by a container.
+Orchestrators and load balancers.In order to check an application status.
+For example, a container orchestrator may respond to a failing health check by halting a rolling deployment or restarting a container.
+  Or.
+Another example is a load balancer might react to unhealthy application by routing traffic away from
+the failing instance to health instances
+
+Database health checks in ASP.Net core provide a way to monitor the status of your application and its dependencies.
+GitHub Libary for healthCheck Up Packages:-https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks?tab=readme-ov-file 
+package Source:- https://www.nuget.org/packages/AspNetCore.HealthChecks.NpgSql
+ */
+
+#endregion
+//IN order to understand  contanarization of catalog service happens video no 100 is vimp
 app.MapCarter();
 app.UseExceptionHandler(option => { });//empty option parameter indicates that we are relying on custom configured handler.
+app.UseHealthChecks("/health",new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 app.Run();
 
 

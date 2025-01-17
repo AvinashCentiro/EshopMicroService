@@ -22,17 +22,15 @@ namespace Catalog.API.Products.CreateProduct
     }
 
 
-    internal class CreateProductCommandHandler(IDocumentSession session,ILogger<CreateProductCommandHandler> logger) 
+    internal class CreateProductCommandHandler(IDocumentSession session) 
         : ICommandHandler<CreateProductCommand,CreateProductResult>
     {
         //select I/F and  alt+Enter to implement missing functions 
         //Mediation pipeline behavior allows us to introduce additional processing steps such as the validation into the handling of the request.
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
-
             // validator This instance is the validator object. It encapsulates all the rules for validating a CreateProductCommand.
 
-            logger.LogInformation("Called CreateProductCommandHandler.Handle with {@command}",command);
             var product = new Product
             {
                 Name = command.Name,

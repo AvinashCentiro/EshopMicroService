@@ -9,11 +9,12 @@ namespace BuildingBlocks.Behaviors
        (IEnumerable<IValidator<TRequest>> validators) :IPipelineBehavior<TRequest, TResponse>
     where TRequest : ICommand<TResponse>
     {
-
+        #region CodeNotes
         //video no 85 is  very important as it has explanantion why and how we can add generics to our Behavior which things we can consider for it.
         //Pipeline Behaviors: These are middleware components in the pipeline. Each behavior can process the request before or after passing it to the next behavior in the chain.
+        // Mediator pipeline behavior allows us to introduce additional processing steps such as the validation into the handling of the request.
+        #endregion
 
-       // Mediator pipeline behavior allows us to introduce additional processing steps such as the validation into the handling of the request.
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
 

@@ -15,15 +15,14 @@ namespace Catalog.API.Products.UpdateProduct
             RuleFor(x => x.Id).NotEmpty().WithMessage("Product Id Must be Present");
             RuleFor(x => x.Name).NotEmpty().WithMessage("Name is Required").Length(2,150).WithMessage("Name must be between 2 and 150 chars");
             RuleFor(x => x.Price).GreaterThan(0).WithMessage("Price must br greater than 0");
-            RuleFor(x => x.Id).NotEmpty().WithMessage("");
+            RuleFor(x => x.Id).NotEmpty().WithMessage("ID is required.");
         }
     }
 
-    internal class UpdateProductHandler(IDocumentSession session,ILogger<UpdateProductHandler> logger) : ICommandHandler<UpdateProductCommand, UpdateProductResult>
+    internal class UpdateProductHandler(IDocumentSession session) : ICommandHandler<UpdateProductCommand, UpdateProductResult>
     {
         public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken)
         {
-            logger.LogInformation("UpdateProductHandler.Handle with command:{@command}",command);
             var product = await session.LoadAsync<Product>(command.Id,cancellationToken);
             //session.LoadAsync<Product> here we are expecting Product Info so adding Product here.
             //(command.Id,cancellationToken) this will retrieve single product
