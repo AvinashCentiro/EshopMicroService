@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{5D989FA5-975F-4432-9C0C-D2FE5A323A7D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{9ECF06F0-5B0D-4824-814C-8101F75E6EE7}"
+	ProjectSection(SolutionItems) = preProject
+		CatalogServiceREADME.txt = CatalogServiceREADME.txt
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.API", "Services\Catalog\Catalog.API\Catalog.API.csproj", "{435D9483-389F-47B2-816D-26A1C744533C}"
 EndProject
@@ -14,6 +17,13 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingBlocks", "BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj", "{9A467492-0FB6-48D9-9E6D-FA1FEAAED75E}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{60E5B71E-FBCC-4C96-BCD4-5A87BCCA53A2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basket", "Basket", "{E28892B4-FD55-43FD-8C22-FDE9EDE4A8EF}"
+	ProjectSection(SolutionItems) = preProject
+		BasketServiceREADME.txt = BasketServiceREADME.txt
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.API", "Services\Basket\Basket.API\Basket.API.csproj", "{3EB9A4B4-C5D1-4095-9149-8D1905FC8C25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +43,10 @@ Global
 		{60E5B71E-FBCC-4C96-BCD4-5A87BCCA53A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60E5B71E-FBCC-4C96-BCD4-5A87BCCA53A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60E5B71E-FBCC-4C96-BCD4-5A87BCCA53A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EB9A4B4-C5D1-4095-9149-8D1905FC8C25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB9A4B4-C5D1-4095-9149-8D1905FC8C25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EB9A4B4-C5D1-4095-9149-8D1905FC8C25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB9A4B4-C5D1-4095-9149-8D1905FC8C25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +55,8 @@ Global
 		{9ECF06F0-5B0D-4824-814C-8101F75E6EE7} = {5D989FA5-975F-4432-9C0C-D2FE5A323A7D}
 		{435D9483-389F-47B2-816D-26A1C744533C} = {9ECF06F0-5B0D-4824-814C-8101F75E6EE7}
 		{9A467492-0FB6-48D9-9E6D-FA1FEAAED75E} = {803918F3-1BA0-48C9-9B2F-2B1F3F40F817}
+		{E28892B4-FD55-43FD-8C22-FDE9EDE4A8EF} = {5D989FA5-975F-4432-9C0C-D2FE5A323A7D}
+		{3EB9A4B4-C5D1-4095-9149-8D1905FC8C25} = {E28892B4-FD55-43FD-8C22-FDE9EDE4A8EF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {12FB993B-80F6-402A-82B8-827CCA35E3FE}
