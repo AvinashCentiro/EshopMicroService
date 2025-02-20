@@ -1,6 +1,8 @@
 
 
 using BuildingBlocks.Exceptions.Handler;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 //Add services to the containers
@@ -25,12 +27,29 @@ builder.Services.AddMarten(
 
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    //options.InstanceName="Basket";
+});
+
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+//before adding healthcheck go to aspnetcore.diagnostics.healthchecks(Github) and copy postgres and redis NugetMngr version and add it to Basket project
+builder.Services.AddHealthChecks()
+    .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
+    .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
+
+
 var app = builder.Build();
 
 //Configure the HTTP request pipeline
 app.MapCarter();
-app.UseExceptionHandler(options =>
-{
-
-});
+app.UseExceptionHandler(options =>{});
+app.UseHealthChecks("/health",
+    new HealthCheckOptions
+    {
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
 app.Run();
