@@ -6,6 +6,8 @@ public record StoreBasketResponse(string UserName);
 
 public class StoreBasketEndPoint : ICarterModule
 {
+    //on order to run multiple projects of soln right click soln->properties and select multiple start up projects
+    // and select projects which you want.
     public void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapPost("/basket", async (StoreBasketRequest request, ISender sender) =>
